@@ -13,17 +13,17 @@ WORKDIR /src
  
 # Copia apenas os arquivos de projeto para aproveitar cache
 COPY FiapCloudGamesAPI/*.csproj FiapCloudGamesAPI/
-RUN dotnet restore FiapCloudGamesAPI/FiapCloudGamesAPI.csproj
+RUN dotnet restore FiapCloudGamesAPI/FCG_API_Jogos.csproj
  
 # Copia o restante do código
 COPY . .
  
 # Publica o projeto
-RUN dotnet publish FiapCloudGamesAPI/FiapCloudGamesAPI.csproj -c Release -o /app/publish
+RUN dotnet publish FiapCloudGamesAPI/FCG_API_Jogos.csproj -c Release -o /app/publish
  
 # Etapa final de runtime
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
  
-ENTRYPOINT ["dotnet", "FiapCloudGamesAPI.dll"]
+ENTRYPOINT ["dotnet", "FCG_API_Jogos.dll"]
