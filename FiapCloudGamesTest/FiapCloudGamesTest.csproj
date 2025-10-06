@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- Alterado de net9.0 para net8.0 para compatibilidade -->
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Pacotes de teste são geralmente compatíveis, mantendo as versões mais recentes -->
+		<PackageReference Include="Bogus" Version="35.6.3" />
+		    <PackageReference Include="coverlet.collector" Version="6.0.2" />
+
+		<!-- Pacotes da Microsoft atualizados para a versão 8.0.x -->
+		    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.7" />
+		    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+
+		    <PackageReference Include="Moq" Version="4.20.72" />
+		    <PackageReference Include="xunit" Version="2.9.2" />
+		    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+		 
+	</ItemGroup>
+
+	  <ItemGroup>
+		<!-- Referência ao projeto principal, que agora também é .NET 8 -->
+		    <ProjectReference Include="..\FiapCloudGamesAPI\FCG_API_Jogos.csproj" />
+		 
+	</ItemGroup>
+
+	  <ItemGroup>
+		    <Using Include="Xunit" />
+		 
+	</ItemGroup>
+
+</Project>
