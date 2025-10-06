@@ -16,7 +16,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   imageName: fcg_jogos 
-  tag: $(Build.BuildId
+  tag: $(Build.BuildId)
 
 steps:
 - task: UseDotNet@2
