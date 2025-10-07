@@ -18,7 +18,7 @@ using System.Text;
 
 #region Configuration
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(80));
+builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(5030));
 #endregion
 
 #region Authentication & Authorization
@@ -98,6 +98,8 @@ builder.Services.AddSingleton<IElasticClient>(sp =>
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICacheService, MemCacheService>();
 builder.Services.AddScoped<IJogoElasticService, JogoElasticService>();
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
+builder.Services.AddHttpClient<PagamentoApiService>();
 builder.Services.AddCorrelationIdGenerator();
 builder.Services.AddTransient(typeof(BaseLogger<>));
 builder.Services.AddHttpContextAccessor();
@@ -108,7 +110,7 @@ builder.Services.AddMemoryCache();
 
 #region Application Pipeline
 var app = builder.Build();
-app.MapGet("/", () => Results.Text("Bem-vindo a FiapCloudGames!!!", "text/plain"));
+//app.MapGet("/", () => Results.Text("Bem-vindo a FiapCloudGames!!!", "text/plain"));
 
 using (var scope = app.Services.CreateScope())
 {

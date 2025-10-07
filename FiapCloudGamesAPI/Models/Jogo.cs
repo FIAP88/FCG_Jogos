@@ -23,7 +23,7 @@ namespace FiapCloudGamesAPI.Models
 
         public int NumeroVendas { get; set; } = 0;
 
-        public List<string> Tags { get; set; } // para buscas e sugestões
+        public List<string>? Tags { get; set; } // para buscas e sugestões
 
         public long IdFornecedor { get; set; } = idFornecedor;
         public EmpresaFornecedora EmpresaFornecedora { get; set; }

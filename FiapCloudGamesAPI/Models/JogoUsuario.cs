@@ -11,5 +11,10 @@ namespace FiapCloudGamesAPI.Models
         public long JogoId { get; set; }
 
         public Jogo Jogo { get; set; }
+
+        public Guid PagamentoId { get; set; }
+
+        [NotMapped]
+        public string Status { get; set; }
     }
 }

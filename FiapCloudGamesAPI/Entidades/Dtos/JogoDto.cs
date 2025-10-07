@@ -16,6 +16,6 @@ namespace FiapCloudGamesAPI.Entidades.Dtos
 
         public bool Ativo { get; set; } 
 
-        public long IdFornecedor { get; set; } 
+        public long IdFornecedor { get; set; }
     }
 }

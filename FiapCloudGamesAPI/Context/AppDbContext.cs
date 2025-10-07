@@ -34,7 +34,6 @@ namespace FiapCloudGamesAPI.Context
             modelBuilder.ApplyConfiguration(new JogoConfiguration());
             modelBuilder.ApplyConfiguration(new CategoriaConfiguration());
             modelBuilder.ApplyConfiguration(new EmpresaFornecedoraConfiguration());
-            modelBuilder.ApplyConfiguration(new LogConfiguration());
             
             base.OnModelCreating(modelBuilder);
 

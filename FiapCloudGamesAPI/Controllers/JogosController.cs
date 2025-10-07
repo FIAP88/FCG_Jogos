@@ -1,4 +1,5 @@
-﻿using FCG_API_Jogos.Services;
+﻿using FCG_API_Jogos.Entidades;
+using FCG_API_Jogos.Services;
 using FiapCloudGamesAPI.Context;
 using FiapCloudGamesAPI.Entidades.Dtos;
 using FiapCloudGamesAPI.Entidades.Requests;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Text.Json;
 
 namespace FiapCloudGamesAPI.Controllers
 {
@@ -18,11 +20,13 @@ namespace FiapCloudGamesAPI.Controllers
         AppDbContext context, 
         BaseLogger<Jogo> logger, 
         IHttpContextAccessor httpContext,
-        IJogoElasticService elasticService) :
+        IJogoElasticService elasticService,
+        PagamentoApiService pagamentoApi) :
         BaseControllerCrud<Jogo>(context, logger, httpContext)
     {
 
         private readonly IJogoElasticService _elasticService = elasticService;
+        private readonly PagamentoApiService _pagamentoApi = pagamentoApi;
 
         [HttpGet]
         [Authorize(Policy = "BuscarJogos")]
@@ -85,20 +89,43 @@ namespace FiapCloudGamesAPI.Controllers
             return Ok(jogos);
         }
 
-        [HttpPost("MeusJogos/AdicionarJogo")]
+        [HttpPost("ComprarJogo")]
         [Authorize(Policy = "AdicionarJogo")]
-        [SwaggerOperation("Adicionar jogo à minha lista de jogos")]
-        public async Task<IActionResult> AdicionarJogo(long idJogo)
+        [SwaggerOperation("Comprar jogo")]
+        public async Task<IActionResult> ComprarJogo(long idJogo)
         {
             if(await _context.JogosUsuarios.AsNoTracking().CountAsync(j => j.UsuarioId == IdUsuarioLogado && j.JogoId == idJogo ) != 0)
                 return BadRequest("Jogo já adicionado à sua lista de jogos.");
-            else if(await _context.Jogos.AsNoTracking().FirstOrDefaultAsync(j => j.Id == idJogo) == null)
+
+            var jogo = await _context.Jogos.FindAsync(idJogo);
+
+            if (jogo == null)
                 return BadRequest("Jogo não cadastrado no sistema.");
 
-            await _context.JogosUsuarios.AddAsync(new JogoUsuario { UsuarioId = IdUsuarioLogado, JogoId = idJogo });
-            await _context.SaveChangesAsync();
-            _logger.LogInformation($"Jogo com ID: {idJogo} adicionado à lista de jogos do usuário com ID: {IdUsuarioLogado}.");
-            return Ok();
+            var pagamentoResponse = await _pagamentoApi.CriarTransacaoAsync(new PagamentoRequest()
+            {
+                Valor = jogo.Preco,
+                CorrelationId = new Guid(),
+                ClienteId = IdUsuarioLogado,
+                PedidoId = jogo.Id
+            });
+            if (pagamentoResponse.IsSuccessStatusCode)
+            {
+                string jsonResult = await pagamentoResponse.Content.ReadAsStringAsync();
+
+                using var doc = JsonDocument.Parse(jsonResult);
+                Guid pagamentoId = doc.RootElement.GetProperty("result").GetProperty("pagamentoId").GetGuid();
+
+                await _context.JogosUsuarios.AddAsync(new JogoUsuario { UsuarioId = IdUsuarioLogado, JogoId = idJogo, PagamentoId = pagamentoId });
+                await _context.SaveChangesAsync();
+                var msgOK = $"Jogo com ID: {idJogo} para usuário com ID: {IdUsuarioLogado}, aguardando confirmação de pagamento, consultar pedido com Id {pagamentoId}";
+                _logger.LogInformation(msgOK);
+                return Ok(msgOK);
+            }
+            else
+            {
+                return StatusCode(500, "Não foi possivel realizar o pedido");
+            }
         }
 
         [HttpPost("Sugerir")]
@@ -115,7 +142,11 @@ namespace FiapCloudGamesAPI.Controllers
             return Ok(metricas);
         }
 
-
+        [HttpGet("ConsultarPedido")]
+        public async Task<IActionResult> ConsultarPedido([FromQuery] Guid pedido)
+        {
+            return Ok(await _pagamentoApi.ObterStatusTransacaoAsync(pedido));
+        }
         protected override bool EntityExists(long id) => _context.Jogos.Any(e => e.Id == id);
     }
 }
