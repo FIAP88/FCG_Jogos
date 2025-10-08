@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 
 # Expõe explicitamente as portas usadas pela aplicação
-EXPOSE 5030
+EXPOSE 80
 EXPOSE 443
 
 # Define variável de ambiente para Kestrel escutar na porta 5030
