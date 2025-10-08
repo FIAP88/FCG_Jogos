@@ -6,9 +6,6 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Define variável de ambiente para Kestrel escutar na porta 5030
-ENV ASPNETCORE_URLS=http://+:5030
-
 # Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
