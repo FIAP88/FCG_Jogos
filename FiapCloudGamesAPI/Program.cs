@@ -18,7 +18,7 @@ using System.Text;
 
 #region Configuration
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(5030));
+builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(80));
 #endregion
 
 #region Authentication & Authorization
