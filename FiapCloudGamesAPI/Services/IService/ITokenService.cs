@@ -4,8 +4,7 @@ namespace FCG_API_Jogos.Services.IService
 {
     public interface ITokenService
     {
-        string GerarToken(Usuario usuario);
-
-        long GetUsuarioId(string token);
+        Guid GetUsuarioId(string token);
+        string GetUsuarioName(string token);
     }
 }

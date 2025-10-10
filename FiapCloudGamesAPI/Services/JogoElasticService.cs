@@ -11,7 +11,7 @@ namespace FCG_API_Jogos.Services
         Task RemoverAsync(string id);
         Task AtualizarAsync(Jogo jogo);
 
-        Task<List<JogoElasticDto>> SugerirJogosParaUsuarioAsync(long usuarioId);
+        Task<List<JogoElasticDto>> SugerirJogosParaUsuarioAsync(Guid usuarioId);
         Task<IDictionary<string, List<JogoElasticDto>>> ObterTopJogosPorCategoriaAsync(int topN = 3);
 
     }
@@ -77,7 +77,7 @@ namespace FCG_API_Jogos.Services
             }
         }
 
-        public async Task<List<JogoElasticDto>> SugerirJogosParaUsuarioAsync(long usuarioId)
+        public async Task<List<JogoElasticDto>> SugerirJogosParaUsuarioAsync(Guid usuarioId)
         {
             // 1️⃣ Buscar jogos que o usuário atual já possui
             var jogosDoUsuarioResponse = await _client.SearchAsync<JogoElasticDto>(s => s

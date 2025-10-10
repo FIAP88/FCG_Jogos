@@ -23,10 +23,6 @@ namespace FCG_API_Jogos.Configurations
             builder.Property(p => p.DataAtualizacao).HasColumnType("DATETIME2");
             builder.Property(p => p.AtualizadoPor).HasColumnType("VARCHAR(100)");
 
-            builder.HasOne(p => p.Usuario)
-                .WithMany(p => p.Avaliacoes)
-                .HasForeignKey(p => p.IdUsuario);
-
                 builder.HasOne(p => p.Jogo)
                 .WithMany(p => p.Avaliacoes)
                 .HasForeignKey(p => p.IdJogo);

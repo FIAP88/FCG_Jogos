@@ -22,9 +22,11 @@ namespace FCG_API_Jogos.Infra.Middleware
             if (!string.IsNullOrEmpty(token))
             {
                 var usuarioId = tokenService.GetUsuarioId(token);
-                var usuario = await context.Usuarios.FindAsync(usuarioId);
-                if (usuario != null)
-                    httpContext.Items["Usuario"] = usuario;
+                var usuarioName = tokenService.GetUsuarioName(token);
+
+                httpContext.Items["UsuarioId"] = usuarioId;
+                if (usuarioName != null)
+                    httpContext.Items["UsuarioName"] = usuarioName;
             }
             
             await _next(httpContext);

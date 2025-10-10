@@ -116,7 +116,10 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddEntityFrameworkCoreInstrumentation()
-            .AddAzureMonitorTraceExporter();
+            .AddAzureMonitorTraceExporter(options =>
+            {
+                options.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+            });
     });
 
 builder.Host.UseSerilog();

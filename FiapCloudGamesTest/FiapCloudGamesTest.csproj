@@ -32,6 +32,8 @@
 	  <ItemGroup>
 		    <Using Include="Xunit" />
 		 
-	</ItemGroup>
+	</ItemGroup><ItemGroup>
+  <Folder Include="Data\" />
+</ItemGroup>
 
 </Project>

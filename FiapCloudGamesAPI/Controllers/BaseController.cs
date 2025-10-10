@@ -9,17 +9,19 @@ namespace FCG_API_Jogos.Controllers
     {
         protected readonly AppDbContext _context;
         protected readonly BaseLogger<T> _logger;
-        protected readonly Usuario? _usuario;
+        protected readonly string _usuarioName;
+        protected readonly Guid? _usuarioId;
 
         public BaseController(AppDbContext context, BaseLogger<T> logger, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _logger = logger;
-            _usuario = httpContextAccessor?.HttpContext?.Items["Usuario"] as Usuario;
+            _usuarioName = httpContextAccessor?.HttpContext?.Items["UsuarioName"] as string;
+            _usuarioId = httpContextAccessor?.HttpContext?.Items["UsuarioId"] as Guid? ;
         }
 
-        protected string NomeUsuarioLogado { get => _usuario?.Nome ?? string.Empty; }
+        protected string NomeUsuarioLogado => _usuarioName ?? string.Empty;
 
-        protected long IdUsuarioLogado => _usuario?.Id ?? 0;
+        protected Guid IdUsuarioLogado => _usuarioId ?? new Guid();
     }
 }

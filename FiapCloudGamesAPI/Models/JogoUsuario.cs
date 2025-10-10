@@ -4,9 +4,7 @@ namespace FCG_API_Jogos.Models
 {
     public class JogoUsuario
     {
-        public long UsuarioId { get; set; }
-        [NotMapped]
-        public Usuario Usuario { get; set; }
+        public Guid UsuarioId { get; set; }
 
         public long JogoId { get; set; }
 

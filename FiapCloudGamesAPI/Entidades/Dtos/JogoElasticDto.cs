@@ -17,7 +17,7 @@ namespace FCG_API_Jogos.Entidades.Dtos
 
         public int NumeroVendas { get; set; }
 
-        public List<long> UsuariosId { get; set; }
+        public List<Guid> UsuariosId { get; set; }
 
         //public ICollection<Avaliacao> Avaliacoes { get; set; }
     }

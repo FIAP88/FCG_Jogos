@@ -12,64 +12,35 @@ namespace AutenticacaoEAutorizacaoCorreto.Services
     public class TokenService : ITokenService
     {
         private readonly ConfigSecret _configSecret;
+
+        private TokenValidationParameters GetValidationParameters(byte[] key) => new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero
+        };
+
+
         public TokenService(IOptions<ConfigSecret> configSecret)
         {
             _configSecret = configSecret.Value;
         }
 
-        public string GerarToken(Usuario user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var key = Encoding.ASCII.GetBytes(_configSecret.Secret);
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Nome),
-                new Claim(ClaimTypes.Role, user.Perfil.Descricao)
-            };
-
-            if (user.Perfil?.PerfilPermissoes != null)
-            {
-                foreach (var permissao in user.Perfil.PerfilPermissoes)
-                {
-                    claims.Add(new Claim("permission", permissao.Permissao.Descricao));
-                }
-            }
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
-
-        public long GetUsuarioId(string token)
+        public Guid GetUsuarioId(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configSecret.Secret);
 
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            };
+            var validationParameters = GetValidationParameters(key);
 
             try
             {
                 var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
                 var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
-                if (userIdClaim != null && long.TryParse(userIdClaim.Value, out long userId))
+                if (userIdClaim != null && Guid.TryParse(userIdClaim.Value, out Guid userId))
                 {
                     return userId;
                 }
@@ -82,5 +53,29 @@ namespace AutenticacaoEAutorizacaoCorreto.Services
             }
         }
 
+        public string GetUsuarioName(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configSecret.Secret);
+
+            var validationParameters = GetValidationParameters(key);
+
+            try
+            {
+                var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                var userNameClaim = principal.FindFirst(ClaimTypes.Name);
+
+                if (userNameClaim != null)
+                {
+                    return userNameClaim.Value;
+                }
+
+                throw new SecurityTokenException("Invalid token: User Name not found.");
+            }
+            catch
+            {
+                throw new SecurityTokenException("Invalid token.");
+            }
+        }
     }
 }

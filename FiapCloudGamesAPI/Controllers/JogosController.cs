@@ -143,6 +143,7 @@ namespace FCG_API_Jogos.Controllers
         }
 
         [HttpPost("Sugerir")]
+        [SwaggerOperation("Usuarios com os mesmos jogos que você tambem estão jogando esses")]
         public async Task<IActionResult> Sugerir()
         {
             var sugestoes = await _elasticService.SugerirJogosParaUsuarioAsync(IdUsuarioLogado);
@@ -150,6 +151,7 @@ namespace FCG_API_Jogos.Controllers
         }
 
         [HttpGet("Populares")]
+        [SwaggerOperation("Verifique os jogos mais populares de cada categoria")]
         public async Task<IActionResult> MaisPopulares([FromQuery] int top = 5)
         {
             var metricas = await _elasticService.ObterTopJogosPorCategoriaAsync(top);
@@ -157,6 +159,7 @@ namespace FCG_API_Jogos.Controllers
         }
 
         [HttpGet("ConsultarPedido")]
+        [SwaggerOperation("Verifique os status do seu pagamento")]
         public async Task<IActionResult> ConsultarPedido([FromQuery] Guid pedido)
         {
             return Ok(await _pagamentoApi.ObterStatusTransacaoAsync(pedido));
