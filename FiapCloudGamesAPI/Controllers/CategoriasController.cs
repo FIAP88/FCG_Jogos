@@ -1,13 +1,13 @@
-﻿using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Entidades.Dtos;
-using FiapCloudGamesAPI.Entidades.Requests;
-using FiapCloudGamesAPI.Infra;
-using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Entidades.Dtos;
+using FCG_API_Jogos.Entidades.Requests;
+using FCG_API_Jogos.Infra;
+using FCG_API_Jogos.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace FiapCloudGamesAPI.Controllers
+namespace FCG_API_Jogos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

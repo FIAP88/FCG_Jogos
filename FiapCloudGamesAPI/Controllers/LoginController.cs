@@ -1,19 +1,19 @@
 ﻿using AutenticacaoEAutorizacaoCorreto.Services.IService;
-using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Entidades;
-using FiapCloudGamesAPI.Infra;
-using FiapCloudGamesAPI.Models;
-using FiapCloudGamesAPI.Services.IService;
+using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Entidades;
+using FCG_API_Jogos.Infra;
+using FCG_API_Jogos.Models;
+using FCG_API_Jogos.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace FiapCloudGamesAPI.Controllers
+namespace FCG_API_Jogos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [SwaggerTag("Autenticação")]
+    [SwaggerTag("Autenticação Temporaria")]
     public class LoginController(
         AppDbContext context, 
         BaseLogger<Login> logger,

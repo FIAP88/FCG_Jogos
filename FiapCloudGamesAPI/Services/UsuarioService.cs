@@ -1,8 +1,8 @@
-﻿using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Models;
-using FiapCloudGamesAPI.Services.IService;
+﻿using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Models;
+using FCG_API_Jogos.Services.IService;
 
-namespace FiapCloudGamesAPI.Services
+namespace FCG_API_Jogos.Services
 {
     public class UsuarioService
 	{

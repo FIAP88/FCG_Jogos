@@ -1,4 +1,4 @@
-﻿using FiapCloudGamesAPI.Context;
+﻿using FCG_API_Jogos.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace FiapCloudGamesTest.Infra

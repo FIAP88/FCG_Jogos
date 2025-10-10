@@ -1,7 +1,7 @@
-﻿using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Models;
 
-namespace FiapCloudGamesAPI.Infra
+namespace FCG_API_Jogos.Infra
 {
     public class BaseLogger<T>
     {

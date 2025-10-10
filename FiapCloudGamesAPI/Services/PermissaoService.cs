@@ -1,6 +1,6 @@
-﻿using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Models;
 
-namespace FiapCloudGamesAPI.Services
+namespace FCG_API_Jogos.Services
 {
     public class PermissaoService
     {

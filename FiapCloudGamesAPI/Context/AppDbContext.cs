@@ -1,8 +1,8 @@
-﻿using FiapCloudGamesAPI.Configurations;
-using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Configurations;
+using FCG_API_Jogos.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiapCloudGamesAPI.Context
+namespace FCG_API_Jogos.Context
 {
     public class AppDbContext : DbContext
     {
@@ -26,8 +26,8 @@ namespace FiapCloudGamesAPI.Context
             // Removi a o ApplyConfigurationsFromAssembly, pois é necessario garantiar uma seguencia na inserção dos dados das tabelas.
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
             modelBuilder.ApplyConfiguration(new PerfilConfiguration());
-            modelBuilder.ApplyConfiguration(new JogoUsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new JogoUsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new PermissaoConfiguration());
             modelBuilder.ApplyConfiguration(new PerfilPermissaoConfiguration());
             modelBuilder.ApplyConfiguration(new AvaliacaoConfiguration());

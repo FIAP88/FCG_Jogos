@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FiapCloudGamesAPI.Models
+namespace FCG_API_Jogos.Models
 {
     public class JogoUsuario
     {

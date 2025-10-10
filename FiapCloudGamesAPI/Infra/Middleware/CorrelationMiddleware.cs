@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
 
-namespace FiapCloudGamesAPI.Infra.Middleware
+namespace FCG_API_Jogos.Infra.Middleware
 {
     public class CorrelationMiddleware
     {

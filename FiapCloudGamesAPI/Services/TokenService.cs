@@ -1,6 +1,6 @@
-﻿using FiapCloudGamesAPI.Models;
-using FiapCloudGamesAPI.Models.Configuration;
-using FiapCloudGamesAPI.Services.IService;
+﻿using FCG_API_Jogos.Models;
+using FCG_API_Jogos.Models.Configuration;
+using FCG_API_Jogos.Services.IService;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

@@ -1,5 +1,5 @@
-using FiapCloudGamesAPI.Entidades.Requests;
-using FiapCloudGamesAPI.Models;
+using FCG_API_Jogos.Entidades.Requests;
+using FCG_API_Jogos.Models;
 using FiapCloudGamesTest.Fixtures;
 using System.Text;
 

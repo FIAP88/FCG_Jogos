@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Infra
+﻿namespace FCG_API_Jogos.Infra
 {
     public class CorrelationIdGenerator : ICorrelationIdGenerator
     {

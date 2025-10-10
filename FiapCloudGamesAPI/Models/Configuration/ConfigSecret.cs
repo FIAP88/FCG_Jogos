@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Models.Configuration
+﻿namespace FCG_API_Jogos.Models.Configuration
 {
     public class ConfigSecret
     {

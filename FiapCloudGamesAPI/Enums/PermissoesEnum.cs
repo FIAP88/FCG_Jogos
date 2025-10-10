@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Enums
+﻿namespace FCG_API_Jogos.Enums
 {
     public enum PermissoesEnum
     {

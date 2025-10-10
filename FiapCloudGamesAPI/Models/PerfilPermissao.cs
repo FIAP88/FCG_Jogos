@@ -1,5 +1,5 @@
 
-namespace FiapCloudGamesAPI.Models
+namespace FCG_API_Jogos.Models
 {
     public class PerfilPermissao(long idPerfil, long idPermissao)
     {

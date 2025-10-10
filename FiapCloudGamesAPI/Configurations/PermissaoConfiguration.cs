@@ -1,11 +1,11 @@
-﻿using FiapCloudGamesAPI.Enums;
-using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Enums;
+using FCG_API_Jogos.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 
-namespace FiapCloudGamesAPI.Configurations
+namespace FCG_API_Jogos.Configurations
 {
     public class PermissaoConfiguration : IEntityTypeConfiguration<Permissao>
     {

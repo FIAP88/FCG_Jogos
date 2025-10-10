@@ -1,17 +1,17 @@
 ﻿using FCG_API_Jogos.Entidades;
 using FCG_API_Jogos.Services;
-using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Entidades.Dtos;
-using FiapCloudGamesAPI.Entidades.Requests;
-using FiapCloudGamesAPI.Infra;
-using FiapCloudGamesAPI.Models;
+using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Entidades.Dtos;
+using FCG_API_Jogos.Entidades.Requests;
+using FCG_API_Jogos.Infra;
+using FCG_API_Jogos.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json;
 
-namespace FiapCloudGamesAPI.Controllers
+namespace FCG_API_Jogos.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -48,13 +48,27 @@ namespace FiapCloudGamesAPI.Controllers
         [HttpPut("{id}")]
         [Authorize(Policy = "AtualizarJogo")]
         [SwaggerOperation("Atualizar jogo por ID")]
-        public async Task<IActionResult> PutJogo(long id, JogoRequest jogoRequest)
+        public async Task<IActionResult> PutJogo(long id, Jogo jogoRequest)
         {
             Jogo atualizaJogo = ConvertTypes(jogoRequest);
             var result = await Update(id, atualizaJogo);
             await _elasticService.AtualizarAsync(atualizaJogo);
             return Ok(result);
         }
+
+        [HttpPost("Indexar")]
+        [Authorize(Policy = "CriarJogos")]
+        [SwaggerOperation("Indexar Jogos")]
+        public async Task<IActionResult> IndexarJogos()
+        {
+            var todosJogos = await _context.Jogos.Include(j => j.Categoria).Include(j => j.UsuariosDoJogo).ToListAsync();
+            foreach(var jogo in todosJogos)
+            {
+                await _elasticService.IndexarAsync(jogo);
+            }
+            return Ok();
+        }
+
 
         [HttpPost]
         [Authorize(Policy = "CriarJogos")]
@@ -129,16 +143,16 @@ namespace FiapCloudGamesAPI.Controllers
         }
 
         [HttpPost("Sugerir")]
-        public async Task<IActionResult> Sugerir([FromBody] IEnumerable<string> historicoTags)
+        public async Task<IActionResult> Sugerir()
         {
-            var sugestoes = await _elasticService.SugerirBaseadoNoHistoricoAsync(historicoTags);
+            var sugestoes = await _elasticService.SugerirJogosParaUsuarioAsync(IdUsuarioLogado);
             return Ok(sugestoes);
         }
 
         [HttpGet("Populares")]
         public async Task<IActionResult> MaisPopulares([FromQuery] int top = 5)
         {
-            var metricas = await _elasticService.ObterJogosMaisPopularesAsync(top);
+            var metricas = await _elasticService.ObterTopJogosPorCategoriaAsync(top);
             return Ok(metricas);
         }
 

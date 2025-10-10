@@ -1,4 +1,4 @@
-﻿using FiapCloudGamesAPI.Services;
+﻿using FCG_API_Jogos.Services;
 using Moq;
 
 namespace FiapCloudGamesTest.Services

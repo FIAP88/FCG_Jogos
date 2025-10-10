@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FiapCloudGamesAPI.Entidades
+namespace FCG_API_Jogos.Entidades
 {
     public class EntidadeBase
     {

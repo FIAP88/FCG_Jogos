@@ -1,5 +1,5 @@
 using Bogus.Extensions;
-using FiapCloudGamesAPI.Models;
+using FCG_API_Jogos.Models;
 
 public class JogoTestFixtures
 {

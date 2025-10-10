@@ -1,5 +1,5 @@
 ﻿using Bogus.Extensions.Brazil;
-using FiapCloudGamesAPI.Models;
+using FCG_API_Jogos.Models;
 
 namespace FiapCloudGamesTest.Fixtures
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FiapCloudGamesAPI.Migrations
+namespace FCG_API_Jogos.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration
@@ -19,12 +19,12 @@ namespace FiapCloudGamesAPI.Migrations
                 name: "Log",
                 newName: "Logs");
 
-            migrationBuilder.AddColumn<long>(
+            migrationBuilder.AddColumn<Guid>(
                 name: "PagamentoId",
                 table: "JogoUsuario",
-                type: "bigint",
+                type: "uniqueidentifier",
                 nullable: false,
-                defaultValue: 0L);
+                defaultValue: new Guid());
 
             migrationBuilder.AddColumn<int>(
                 name: "NumeroVendas",

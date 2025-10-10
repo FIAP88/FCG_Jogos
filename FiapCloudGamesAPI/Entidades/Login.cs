@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Entidades
+﻿namespace FCG_API_Jogos.Entidades
 {
     public class Login
     {

@@ -1,7 +1,7 @@
-﻿using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
-namespace FiapCloudGamesAPI.Entidades.Requests
+namespace FCG_API_Jogos.Entidades.Requests
 {
     public class UsuarioRequest : BaseRequest
     {

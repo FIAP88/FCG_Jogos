@@ -1,9 +1,9 @@
-﻿using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Infra;
-using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Infra;
+using FCG_API_Jogos.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FiapCloudGamesAPI.Controllers
+namespace FCG_API_Jogos.Controllers
 {
     public class BaseController<T> : ControllerBase where T : class
     {

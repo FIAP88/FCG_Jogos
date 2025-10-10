@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace FiapCloudGamesAPI.Models.Configuration
+namespace FCG_API_Jogos.Models.Configuration
 {
     public static class PoliticasAutorizacoes
     {

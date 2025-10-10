@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace FiapCloudGamesAPI.Infra
+namespace FCG_API_Jogos.Infra
 {
     public static class ServiceCollectionExtensions
     {

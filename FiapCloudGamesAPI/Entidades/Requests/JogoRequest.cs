@@ -1,6 +1,6 @@
-﻿using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Models;
 
-namespace FiapCloudGamesAPI.Entidades.Requests
+namespace FCG_API_Jogos.Entidades.Requests
 {
     public class JogoRequest : BaseRequest
     {

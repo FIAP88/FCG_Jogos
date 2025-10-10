@@ -1,9 +1,9 @@
-﻿using FiapCloudGamesAPI.Models;
+﻿using FCG_API_Jogos.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FiapCloudGamesAPI.Configurations
+namespace FCG_API_Jogos.Configurations
 {
     public class PerfilConfiguration : IEntityTypeConfiguration<Perfil>
     {

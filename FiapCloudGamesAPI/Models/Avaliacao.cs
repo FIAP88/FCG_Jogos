@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using FiapCloudGamesAPI.Entidades;
+using FCG_API_Jogos.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FiapCloudGamesAPI.Models
+namespace FCG_API_Jogos.Models
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     public class Avaliacao(long idUsuario, long idJogo, int nota, string comentario, string criadoPor) : EntidadeBase(criadoPor)

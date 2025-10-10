@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FiapCloudGamesAPI.Migrations
+namespace FCG_API_Jogos.Migrations
 {
     /// <inheritdoc />
     public partial class StartProject : Migration

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using FiapCloudGamesAPI.Entidades;
+using FCG_API_Jogos.Entidades;
 
-namespace FiapCloudGamesAPI.Models
+namespace FCG_API_Jogos.Models
 {
     public class EmpresaFornecedora(string nome, string cNPJ, string criadoPor) : EntidadeBase(criadoPor)
     {

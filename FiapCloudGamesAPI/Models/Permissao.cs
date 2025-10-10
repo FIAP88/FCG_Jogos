@@ -1,6 +1,6 @@
-﻿using FiapCloudGamesAPI.Entidades;
+﻿using FCG_API_Jogos.Entidades;
 
-namespace FiapCloudGamesAPI.Models
+namespace FCG_API_Jogos.Models
 {
     public class Permissao(string descricao, string criadoPor) : EntidadeBase(criadoPor)
     {

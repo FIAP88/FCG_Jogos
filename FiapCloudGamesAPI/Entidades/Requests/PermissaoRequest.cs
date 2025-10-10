@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Entidades.Requests
+﻿namespace FCG_API_Jogos.Entidades.Requests
 {
     public class PermissaoRequest : BaseRequest
     {

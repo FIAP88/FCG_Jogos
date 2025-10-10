@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace FiapCloudGamesAPI.Infra.Middleware
+namespace FCG_API_Jogos.Infra.Middleware
 {
     public class TratamentoDeErrosMiddleware
     {

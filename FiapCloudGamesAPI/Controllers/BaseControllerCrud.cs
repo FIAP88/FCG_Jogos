@@ -1,11 +1,11 @@
-﻿using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Entidades;
-using FiapCloudGamesAPI.Infra;
+﻿using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Entidades;
+using FCG_API_Jogos.Infra;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace FiapCloudGamesAPI.Controllers
+namespace FCG_API_Jogos.Controllers
 {
     public class BaseControllerCrud<T> : BaseController<T> where T : EntidadeBase
     {

@@ -1,4 +1,4 @@
-﻿namespace FiapCloudGamesAPI.Entidades.Dtos
+﻿namespace FCG_API_Jogos.Entidades.Dtos
 {
     public class PerfilDto
     {

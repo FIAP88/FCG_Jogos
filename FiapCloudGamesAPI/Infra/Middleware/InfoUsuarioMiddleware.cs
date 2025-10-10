@@ -1,13 +1,13 @@
 ﻿using AutenticacaoEAutorizacaoCorreto.Services.IService;
-using FiapCloudGamesAPI.Context;
-using FiapCloudGamesAPI.Models;
-using FiapCloudGamesAPI.Services;
-using FiapCloudGamesAPI.Services.IService;
+using FCG_API_Jogos.Context;
+using FCG_API_Jogos.Models;
+using FCG_API_Jogos.Services;
+using FCG_API_Jogos.Services.IService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 
-namespace FiapCloudGamesAPI.Infra.Middleware
+namespace FCG_API_Jogos.Infra.Middleware
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project  
     public class InfoUsuarioMiddleware
