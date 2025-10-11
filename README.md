@@ -1,106 +1,102 @@
-# FiapCloudGamesAPI (TechChallenge-03-06)
+# 🎮 FCG_Jogos — API de Jogos da FIAP Cloud Games
 
-FiapCloudGamesAPI é uma plataforma de venda de jogos digitais com funcionalidades para gerenciamento de servidores para partidas online. Essa aplicação oferece recursos para cadastro de usuários, gerenciamento de jogos e bibliotecas, controle de perfis e permissões, entre outros.
-
-## 📌 Funcionalidades Implementadas
-
-- Cadastro de Usuário
-- Cadastro de Jogos
-- Categorias de Jogos
-- Bibliotecas de Jogos
-- Compra de Jogos
-- Fornecedores
-- Gestão de Perfil e Permissões
-
-## 🚀 Tecnologias Utilizadas
-
-- [.NET 9 (STS)](https://dotnet.microsoft.com/)
-- [Entity Framework Core](https://learn.microsoft.com/ef/core/)
-- [SQL Server](https://www.microsoft.com/sql-server)
-- Autenticação via JWT (Bearer Token)
-- Testes Unitários e de Integração com xUnit, Moq e Bogus
-
-## 🚀 Tecnologias Necessárias Instalação
-
-- SDK dotnet 9: https://dotnet.microsoft.com/pt-br/download/dotnet/9.0
-- Sql Server Express: https://go.microsoft.com/fwlink/p/?linkid=2216019&clcid=0x416&culture=pt-br&country=br
-- Pacote dotnet-ef: dotnet tool install --global dotnet-ef
-
-## ⚙️ Como Rodar o Projeto Localmente
-
-1. Abra o prompt de comando: (Win + R) Digite "CMD" e pressione "Enter".
-   
-2. Clone este repositório:
-    ```bash
-    git clone https://github.com/RyanBrayan/TechChallenge-03-06.git
-    cd TechChallenge-03-06/FiapCloudGamesAPI
-    ```    
-3. Aplique as migrations existentes com o comando:
-    
-    - Execute update do EF
-    ```bash
-   dotnet ef database update
-    ```
-
-4. Execute o projeto com o comando:
-    ```bash
-    dotnet run
-    ```
-
-5. A API estará disponível em: `http://localhost:5030/swagger/index.html` (ou conforme configurado).
-
-## 🔐 Autenticação
-
-A API utiliza autenticação via **JWT Bearer Token**. Será necessário incluir o token no header de cada requisição protegida:
-
-```
-> "Por favor, insira 'Bearer' [espaço] e o token JWT"
-
-Authorization: Bearer {token_aqui}
-
-```
-
-Para criação do Token é necessário acessar o endpoint `api/Auth/token` e inserir os dados do usuário administrador, listado abaixo:
-```
-email: "joao.silva@fiapcloudgames.com"
-senha: "123456"
-```
-
-## 🧪 Rodando os Testes
-
-> Certifique-se de que o projeto não esteja rodando antes de executar os testes.
-> Utilize o comando "Ctrl + C" para interromper o projeto.
-
-Direcione-se ao diretório de testes
-```bash
-cd ..
-cd FiapCloudGamesTest
-```
-Execute os testes unitários com:
-```bash
-dotnet test
-```
-
-## 📂 Estrutura do Projeto
-
-- `Configurations` – Modelagem do banco de dados
-- `Entidade` – DTOs, Requests
-- `Infra` – Correlation
-- `Apresentação` – Controllers, autenticação
-
-## ✒️ Autores
-
-- Gabriel Aljarila dos Santos (gabrielaljarila@gmail.com)
-- Gabriel Paulino Farias da Silva (gabriel.paulino@edge.ufal.br)
-- Frederico Lopes Vieira (fredericolv@gmail.com)
-- Leonardo Neves Perles (leonardo.perles@hotmail.com)
-- Ryan Brayan Ferreira Rodrigues (ryanbrayanf@gmail.com)
-
-## 📄 Licença
-
-Este projeto é de uso educacional. Requer ferramentas com licença compatível como .NET SDK (gratuito) e SQL Server (versão gratuita).
-
+API REST para gerenciamento de jogos e integração com pagamentos, busca e métricas, desenvolvida em **.NET 8** com práticas modernas de desenvolvimento.
 
 ---
 
-Desenvolvido com ❤️ usando .NET e conteúdos ensinados na Pós Tech - Arquitetura de Sistemas .Net da FIAP.
+## 🧬 Índice
+
+- [Sobre o Projeto](#sobre-o-projeto)  
+- [Tecnologias](#tecnologias)  
+- [Arquitetura & Infra](#arquitetura--infra)  
+- [Pré-requisitos](#pré-requisitos)  
+- [Instalação](#instalação)  
+- [Configuração](#configuração)  
+- [Execução](#execução)  
+- [Endpoints da API](#endpoints-da-api)  
+- [Testes](#testes)  
+- [Docker](#docker)  
+- [Monitoramento & Logs](#monitoramento--logs)  
+- [Segurança](#segurança)  
+- [Performance](#performance)  
+- [Deploy](#deploy)  
+- [Roadmap / Futuras melhorias](#roadmap--futuras-melhorias)  
+- [Licença](#licença)  
+- [Equipe / Contribuição](#equipe--contribuição)  
+- [Suporte / Contato](#suporte--contato)  
+
+---
+
+## 📘 Sobre o Projeto
+
+A API **FCG_Jogos** é um microserviço responsável pelo gerenciamento dos jogos na plataforma **FIAP Cloud Games**.  
+Ela oferece integração com:
+
+- serviço de pagamentos externo (via API)  
+- ElasticSearch para indexação e busca  
+- métricas e telemetria (Prometheus, OpenTelemetry, Application Insights)  
+- autenticação e autorização via JWT  
+
+### ✨ Funcionalidades
+
+- CRUD de jogos  
+- Integração com serviço de pagamento  
+- Indexação de dados em ElasticSearch  
+- Logging, rastreamento e métricas  
+- Middlewares de tratamento de erros e correlação de requisições  
+
+---
+
+## 💻 Tecnologias
+
+### 🧩 Core & Infraestrutura
+
+- .NET 8  
+- C#  
+- ASP.NET Core Web API  
+- Entity Framework Core + SQL Server  
+- ElasticSearch / NEST  
+- JWT com `Microsoft.AspNetCore.Authentication.JwtBearer`  
+- OpenTelemetry + Azure Monitor / Application Insights  
+- Prometheus (via `prometheus-net`)  
+- Serilog para logging  
+- Middleware customizado para tratamento de erros e correlação  
+- HTTP Client para integração com API de pagamentos  
+
+---
+
+## 🏛 Arquitetura & Infra
+
+A arquitetura do projeto está organizada para manter separação de responsabilidades, modularidade e testabilidade.  
+
+- Camadas (ideal): Presentation / Serviços / Infra / Configuração  
+- Middlewares personalizados (`tratamento de erros`, `correlação`, `info do usuário`)  
+- Integração com ElasticSearch (indexação de jogos)  
+- Uso de `IHttpClientFactory` para chamadas externas  
+- Telemetria distribuída com OpenTelemetry + Application Insights  
+
+---
+
+## ⚙️ Pré-requisitos
+
+- .NET 8 SDK  
+- SQL Server (Azure SQL ou local)  
+- ElasticSearch acessível  
+- Credenciais de API de pagamentos e chave secreta  
+- Docker (se usar contêiner)  
+- Git  
+
+---
+
+## 🚀 Instalação
+
+```bash
+# Clonar o repositório
+git clone https://github.com/FIAP88/FCG_Jogos.git
+cd FCG_Jogos
+
+# Restaurar dependências
+dotnet restore
+
+# Compilar
+dotnet build
