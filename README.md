@@ -62,8 +62,8 @@ Authorization: Bearer {token_aqui}
 
 Para criação do Token é necessário acessar o endpoint `api/login` e inserir os dados do usuário administrador, listado abaixo:
 ```
-email: "joao@email.com"
-senha: "Te$te123"
+email: "joao.silva@fiapcloudgames.com"
+senha: "123456"
 ```
 
 ## 🧪 Rodando os Testes
