@@ -1,34 +1,63 @@
-# ASP.NET
-# Build and test ASP.NET projects.
-# Add steps that publish symbols, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+name: CI-FCG_Jogos
 
 trigger:
-- main
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - develop
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  imageName: fcg_jogos 
+  tag: $(Build.BuildId)
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: UseDotNet@2
   inputs:
-    restoreSolution: '$(solution)'
+    packageType: sdk
+    version: 8.0.x
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- checkout: self
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: 'Restore packages'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'restore'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
+  inputs:
+    command: 'test'
+    projects: '**/*Tests.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+# Só builda e publica a imagem se estiver na branch main
+- ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+  - script: |
+      docker build -t $(dockerHubUser)/$(imageName):$(tag) .
+    displayName: 'Docker Build'
+
+  - script: |
+      echo $(dockerHubPass) | docker login -u "$(dockerHubUser)" --password-stdin
+    displayName: 'Docker Login'
+
+  - script: |
+      docker push $(dockerHubUser)/$(imageName):$(tag)
+      docker tag $(dockerHubUser)/$(imageName):$(tag) $(dockerHubUser)/$(imageName):latest
+      docker push $(dockerHubUser)/$(imageName):latest
+    displayName: 'Docker Push'
