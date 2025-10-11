@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace FCG_API_Jogos.Entidades.Dtos
 {
     public class JogoElasticDto
@@ -17,6 +19,7 @@ namespace FCG_API_Jogos.Entidades.Dtos
 
         public int NumeroVendas { get; set; }
 
+        [JsonIgnore]
         public List<Guid> UsuariosId { get; set; }
 
         //public ICollection<Avaliacao> Avaliacoes { get; set; }

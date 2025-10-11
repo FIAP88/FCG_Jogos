@@ -168,7 +168,7 @@ using (var scope = app.Services.CreateScope())
             .Map<JogoElasticDto>(m => m
                 .AutoMap()
                 .Properties(p => p
-                    .Number(n => n.Name(nn => nn.UsuariosId).Type(NumberType.Long))
+                    .Keyword(k => k.Name(nn => nn.UsuariosId))
                     .Text(t => t.Name(n => n.Nome).Analyzer("standard"))
                     .Text(t => t.Name(n => n.Descricao).Analyzer("standard"))
                     .Object<CategoriaElasticDto>(o => o
